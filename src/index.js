@@ -3,6 +3,8 @@ import { ApolloServer } from 'apollo-server'
 import { typeDefs } from './typeDefs'
 import { resolvers } from './resolvers'
 
+import isValidQuery from './services/isValidQuery'
+
 
 const server = new ApolloServer({ 
   typeDefs, 
@@ -13,12 +15,9 @@ const server = new ApolloServer({
     return { message: err.message, locations: err.locations, path: err.path, extensions: { code: err.extensions.code } }
   },
   context: ({req}) => {
-    const afterSplit = req.body.query.split(' ')
-
-    if (!afterSplit.includes('query')){
+    if (isValidQuery(req.body.query)){
       console.log ("##  REQUEST  ##\nquery: ", req.body.query)
     }
-
   }
 });
 
