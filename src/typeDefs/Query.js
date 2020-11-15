@@ -2,6 +2,7 @@ import { gql } from 'apollo-server'
 
 export default gql`
   type Query {
-    students: [Student]
+    students: [Student],
+    student(matriculation: String): Student
   }
 `

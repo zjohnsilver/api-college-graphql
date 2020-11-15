@@ -13,6 +13,12 @@ export default gql`
     name: String,
     email: String,
     birth_day: Date,
-    started_in: Date
+    started_in: Date,
+    subjects: [Subject]
+  }
+
+  type Subject {
+    id: Int
+    name: String
   }
 `

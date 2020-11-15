@@ -7,20 +7,20 @@ export class StudentRepository {
     this.pool = pool
   }
 
-  async get (id) {
-    return getOne(this.pool, queryGetStudentByID, [id])
+  async get (matriculation) {
+    return getOne(this.pool, queryGetStudentByID, [matriculation])
   }
 
   async getAll () {
     return getMultiple(this.pool, queryGetAllStudents)
   }
 
-  async getSubjects (id) {
-    return getMultiple(this.pool, queryGetStudentSubjects, [id])
+  async getSubjects (matriculation) {
+    return getMultiple(this.pool, queryGetStudentSubjects, [matriculation])
   }
 
-  async getHistoricData (student_id) {
-    return getMultiple(this.pool, queryGetHistoricData, [student_id])
+  async getHistoricData (matriculation) {
+    return getMultiple(this.pool, queryGetHistoricData, [matriculation])
   }
 
   async createStudent (params) {
