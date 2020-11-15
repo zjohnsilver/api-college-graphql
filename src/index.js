@@ -1,9 +1,11 @@
 import { ApolloServer } from 'apollo-server'
 
+import 'module-alias/register'
+
 import { typeDefs } from './typeDefs'
 import { resolvers } from './resolvers'
 
-import isValidQuery from './services/isValidQuery'
+import { isValidQuery } from '@services'
 
 const server = new ApolloServer({
   typeDefs,

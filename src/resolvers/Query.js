@@ -1,16 +1,10 @@
+import { StudentRepository } from '@repositories'
+import { pool } from '@db'
+
+const studentRepository = new StudentRepository(pool)
+
 export default {
-  books: async (parent, args, context) => {
-    return books
+  students: async () => {
+    return await studentRepository.getAll()
   }
 }
-
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin'
-  },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster'
-  }
-]
