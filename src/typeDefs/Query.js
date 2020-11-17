@@ -4,5 +4,6 @@ export default gql`
   type Query {
     students: [Student],
     student(matriculation: String): Student
+    subjects(matriculation: String): [Subject]
   }
 `

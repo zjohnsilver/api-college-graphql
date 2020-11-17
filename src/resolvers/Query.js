@@ -5,7 +5,13 @@ const studentRepository = new StudentRepository(pool)
 
 export default {
   students: async () => {
-    return await studentRepository.getAll()
+    const students = await studentRepository.getAll()
+    return students.map(async (student) => {
+      return {
+        ...student,
+        subjects: await studentRepository.getSubjects(student.matriculation)
+      }
+    })
   },
   student: async (parent, { matriculation }) => {
     const student = await studentRepository.get(matriculation)
@@ -15,5 +21,8 @@ export default {
       ...student,
       subjects
     }
+  },
+  subjects: async (parent, { matriculation }) => {
+    return await studentRepository.getSubjects(matriculation)
   }
 }
