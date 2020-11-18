@@ -7,10 +7,6 @@ export default gql`
     email: String,
     birth_day: Date,
     started_in: Date,
-    subjects: [subjectInput]
-  }
-
-  input subjectInput {
-    name: String
+    subjects: [Int]
   }
 `

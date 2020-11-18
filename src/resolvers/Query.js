@@ -1,7 +1,8 @@
-import { StudentRepository } from '@repositories'
+import { StudentRepository, SubjectRepository } from '@repositories'
 import { pool } from '@db'
 
 const studentRepository = new StudentRepository(pool)
+const subjectRepository = new SubjectRepository(pool)
 
 export default {
   students: async () => {
@@ -9,11 +10,11 @@ export default {
     return students.map(async (student) => {
       return {
         ...student,
-        subjects: await studentRepository.getSubjects(student.matriculation)
+        subjects: await subjectRepository.getSubjects(student.matriculation)
       }
     })
   },
-  student: async (parent, { matriculation }) => {
+  student: async (_, { matriculation }) => {
     const student = await studentRepository.get(matriculation)
     const subjects = await studentRepository.getSubjects(matriculation)
 
@@ -22,7 +23,7 @@ export default {
       subjects
     }
   },
-  subjects: async (parent, { matriculation }) => {
-    return await studentRepository.getSubjects(matriculation)
+  subjects: async (_, { matriculation }) => {
+    return await subjectRepository.getSubjects(matriculation)
   }
 }
