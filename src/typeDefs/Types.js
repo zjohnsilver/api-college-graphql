@@ -20,5 +20,13 @@ export default gql`
   type Subject {
     id: Int
     name: String
+    teacher: [Teacher]
+  }
+
+  type Teacher {
+    matriculation: String,
+    name: String,
+    email: String,
+    birth_day: String
   }
 `
