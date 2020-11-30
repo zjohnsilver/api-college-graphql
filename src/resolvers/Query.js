@@ -1,8 +1,9 @@
-import { StudentRepository, SubjectRepository } from '@repositories'
+import { StudentRepository, SubjectRepository, CourseRepository } from '@repositories'
 import { pool } from '@db'
 
 const studentRepository = new StudentRepository(pool)
 const subjectRepository = new SubjectRepository(pool)
+const courseRepository = new CourseRepository(pool)
 
 export default {
   students: async () => {
@@ -25,5 +26,9 @@ export default {
   },
   subjects: async (_, { matriculation }) => {
     return await subjectRepository.getSubjects(matriculation)
+  },
+
+  courses: async () => {
+    return await courseRepository.getCourses()
   }
 }

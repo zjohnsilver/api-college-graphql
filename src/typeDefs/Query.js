@@ -5,5 +5,6 @@ export default gql`
     students: [Student],
     student(matriculation: String): Student
     subjects(matriculation: String): [Subject]
+    courses: [Course]
   }
 `

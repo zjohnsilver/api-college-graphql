@@ -7,6 +7,13 @@ export default gql`
     author: String
   }
 
+  type Course {
+    id: Int,
+    name: String
+    tag: String
+    teachers: [Teacher]
+  }
+
   type Student {
     id: Int,
     matriculation: String,
@@ -20,13 +27,14 @@ export default gql`
   type Subject {
     id: Int
     name: String
-    teacher: [Teacher]
+    teachers: [Teacher]
   }
 
   type Teacher {
     matriculation: String,
     name: String,
     email: String,
-    birth_day: String
+    birth_day: Date
+    subjects: [Subject]
   }
 `
