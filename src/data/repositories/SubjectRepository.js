@@ -29,6 +29,10 @@ export class SubjectRepository {
 
     return await getMultiple(this.pool, queryAddSubjects)
   }
+
+  async getSubjectsByCourse (courseId) {
+    return await getMultiple(this.pool, queryGetSubjectsByCourse, [courseId])
+  }
 }
 
 const queryGetStudentSubjects = `
@@ -46,4 +50,13 @@ const queryGetSubjects = `
     id, 
     name 
   FROM manage.subject
+`
+const queryGetSubjectsByCourse = `
+  SELECT 
+    "subject".id,
+    "subject".name,
+    "course_subject".semester
+  FROM manage.course_subject
+  LEFT JOIN manage."subject" ON "subject".id = course_subject.subject_id
+  WHERE course_id = $1
 `

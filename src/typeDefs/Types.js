@@ -12,6 +12,7 @@ export default gql`
     name: String
     tag: String
     teachers: [Teacher]
+    subjects: [Subject]
   }
 
   type Student {
@@ -27,6 +28,7 @@ export default gql`
   type Subject {
     id: Int
     name: String
+    semester: String
     teachers: [Teacher]
   }
 
