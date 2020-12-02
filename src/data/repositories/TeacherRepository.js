@@ -65,7 +65,7 @@ const queryGetTeachersByCourse = `
     "teacher".email,
     "teacher".birth_day
   FROM manage.course_teacher
-  LEFT JOIN manage."teacher" ON "teacher".id = course_teacher.teacher_id
+  LEFT JOIN manage."teacher" ON "teacher".matriculation = course_teacher.teacher_matriculation
   WHERE "course_teacher".course_id = $1
   ORDER BY "teacher".matriculation
 `

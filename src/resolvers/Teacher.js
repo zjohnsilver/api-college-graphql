@@ -1,10 +1,10 @@
-import { TeacherRepository } from '@repositories'
+import { SubjectRepository } from '@repositories'
 import { pool } from '@db'
 
-const teacherRepository = new TeacherRepository(pool)
+const subjectRepository = new SubjectRepository(pool)
 
 export default {
-  subjects: async ({ courseId, matriculation }) => {
-    return teacherRepository.getTeacherSubjects(courseId, matriculation)
+  subjects: async ({ courseId, matriculation: teacherMatriculation }) => {
+    return subjectRepository.getSubjectsByCourseAndTeacher(courseId, teacherMatriculation)
   }
 }

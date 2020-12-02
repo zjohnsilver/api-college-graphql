@@ -33,7 +33,7 @@ export default gql`
   }
 
   type Teacher {
-    matriculation: String,
+    matriculation: Float,
     name: String,
     email: String,
     birth_day: Date
