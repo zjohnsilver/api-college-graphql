@@ -44,6 +44,10 @@ export class StudentRepository {
   async deleteStudent (matriculation) {
     return getOne(this.pool, queryDeleteStudent, [matriculation])
   }
+
+  async getStudentsBySubjectAndTeacher (subjectId, teacherMatriculation) {
+    return getMultiple(this.pool, queryGetStudentsBySubjectAndTeacher, [subjectId, teacherMatriculation])
+  }
 }
 
 const queryGetStudentByID = `
@@ -105,4 +109,17 @@ const queryDeleteStudent = `
   DELETE FROM manage."student"
   WHERE matriculation = $1
   RETURNING *
+`
+
+const queryGetStudentsBySubjectAndTeacher = `
+  SELECT
+    "student".matriculation,
+    "student".name,
+    "student".email,
+    "student".birth_day
+  FROM manage."class"
+  LEFT JOIN manage."student" ON "student".id = "class".student_id
+  LEFT JOIN manage."teacher_subject" ON "teacher_subject".teacher_matriculation = "class".teacher_matriculation
+  WHERE "teacher_subject".subject_id = $1
+    AND "teacher_subject".teacher_matriculation = $2
 `

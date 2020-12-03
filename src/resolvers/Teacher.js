@@ -5,6 +5,11 @@ const subjectRepository = new SubjectRepository(pool)
 
 export default {
   subjects: async ({ courseId, matriculation: teacherMatriculation }) => {
-    return subjectRepository.getSubjectsByCourseAndTeacher(courseId, teacherMatriculation)
+    const subjects = await subjectRepository.getSubjectsByCourseAndTeacher(courseId, teacherMatriculation)
+
+    return subjects.map(subject => ({
+      ...subject,
+      teacherMatriculation
+    }))
   }
 }

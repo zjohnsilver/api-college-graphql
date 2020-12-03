@@ -29,6 +29,7 @@ export default gql`
     id: Int
     name: String
     semester: String
+    students: [Student]
     teachers: [Teacher]
   }
 
