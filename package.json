@@ -46,5 +46,10 @@
     "@services": "src/services",
     "@repositories": "src/data/repositories",
     "@db": "src/data/db"
+  },
+  "volta": {
+    "node": "20.16.0",
+    "npm": "10.8.1",
+    "yarn": "4.3.1"
   }
 }
