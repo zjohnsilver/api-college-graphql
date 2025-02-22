@@ -1,0 +1,14 @@
+query {
+  studentsByCourse(courseId: 10) {
+    subjects {
+      id
+      name
+      is_optional
+    }
+    matriculation_id
+    name
+    enrollment_date
+    email
+    birthday
+  }
+}

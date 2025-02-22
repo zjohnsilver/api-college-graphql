@@ -1,0 +1,21 @@
+type Teacher {
+  matriculation_id: ID!
+  name: String!
+  email: String!
+  birthday: String!
+  courses: [Course!]!
+  subjects: [Subject!]!
+  students: [Student!]!
+  schedule: [Class!]!
+}
+
+type HistoryRecord {
+  id: ID!
+  subject: Subject!
+  teacher: Teacher!
+  finalGrade: Float
+  approved: Boolean!
+  frequency: Float!
+  startDate: String!
+  endDate: String!
+}

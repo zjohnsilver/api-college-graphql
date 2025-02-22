@@ -1,0 +1,68 @@
+scalar Date
+
+type Book {
+  id: Int!
+  title: String!
+  author: String!
+}
+
+type Course {
+  id: Int!
+  name: String!
+  tag: String
+  teachers: [Teacher!]!
+  subjects: [Subject!]!
+}
+
+type Student {
+  matriculation_id: String!
+  name: String!
+  email: String!
+  birthday: Date!
+  enrollment_date: Date!
+  subjects: [Subject!]!
+  course: Course
+}
+
+type Subject {
+  id: Int!
+  name: String!
+  semester: String!
+  is_optional: Boolean
+  students: [Student!]!
+  teachers: [Teacher!]!
+}
+
+type Teacher {
+  matriculation_id: ID!
+  name: String!
+  email: String!
+  birthday: String!
+  courses: [Course!]!
+  subjects: [Subject!]!
+  students: [Student!]!
+  schedule: [Class!]!
+}
+
+type Class {
+  id: ID!
+  subject: Subject!
+  teacher: Teacher!
+  schedule: String!
+}
+
+type HistoryRecord {
+  id: ID!
+  subject: Subject!
+  teacher: Teacher!
+  finalGrade: Float
+  approved: Boolean!
+  frequency: Float!
+  startDate: String!
+  endDate: String!
+}
+
+type EnrollmentResult {
+  student: Student!
+  course: Course!
+}

@@ -1,0 +1,12 @@
+mutation {
+  enrollStudentInCourse(matriculationId: "12345", courseId: 1) {
+    student {
+      matriculation_id
+      name
+    }
+    course {
+      id
+      name
+    }
+  }
+}

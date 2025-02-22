@@ -1,0 +1,19 @@
+query {
+  getStudentHistory(student_id: "2051045050465") {
+    id
+    subject {
+      id
+      name
+      is_optional
+    }
+    teacher {
+      name
+      email
+    }
+    note
+    approved
+    frequency
+    startTime
+    endTime
+  }
+}

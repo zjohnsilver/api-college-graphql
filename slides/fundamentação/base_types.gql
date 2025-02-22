@@ -1,0 +1,21 @@
+type Student {
+  matriculation_id: ID!
+  name: String!
+  enrollment_date: String!
+  email: String!
+  birthday: String!
+  courses: [Course!]!
+  subjects: [Subject!]!
+}
+
+type Course {
+  id: ID!
+  name: String!
+}
+
+type Subject {
+  id: ID!
+  name: String!
+  tag: String!
+  is_optional: Boolean!
+}

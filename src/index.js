@@ -1,27 +1,41 @@
-import { ApolloServer } from 'apollo-server'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { ApolloServer } from 'apollo-server';
+import { loadSchemaSync } from '@graphql-tools/load';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
+import { join } from 'path';
 
-import 'module-alias/register'
+import resolvers from './resolvers/index.js';
 
-import { typeDefs } from './typeDefs'
-import { resolvers } from './resolvers'
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-import { isValidQuery } from '@services'
+const loadedSchema = loadSchemaSync(join(__dirname, './typeDefs/**/*.graphql'), {
+  loaders: [new GraphQLFileLoader()]
+});
 
 const server = new ApolloServer({
-  typeDefs,
+  typeDefs: loadedSchema,
   resolvers,
-  formatError: (err) => {
-    console.log('GRAPHQL_ERROR: ', { message: err.message, locations: err.locations, path: err.path, extensions: { code: err.extensions.code }, stacktrace: err.extensions.exception.stacktrace })
-
-    return { message: err.message, locations: err.locations, path: err.path, extensions: { code: err.extensions.code } }
-  },
   context: ({ req }) => {
-    if (isValidQuery(req.body.query)) {
-      console.log('##  REQUEST  ##\nquery: ', req.body.query)
-    }
-  }
-})
+    return {
+      // user: getUser(req.headers.authorization)
+    };
+  },
+  formatError: (error) => {
+    console.error('GraphQL Error:', error);
+    return {
+      message: error.message,
+      code: error.extensions?.code || 'INTERNAL_SERVER_ERROR',
+      locations: error.locations,
+      path: error.path,
+    };
+  },
+  debug: process.env.NODE_ENV === 'development',
+});
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`)
-})
+const port = process.env.PORT || 4000;
+
+server.listen(port).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});

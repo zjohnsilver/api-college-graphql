@@ -1,0 +1,4 @@
+input EnrollStudentInput {
+  matriculationId: String!
+  courseId: Int!
+}
