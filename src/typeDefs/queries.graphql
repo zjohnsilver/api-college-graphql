@@ -6,7 +6,7 @@ type Query {
   studentHistory(matriculation: String!): [Schedule!]!
   teacherStudents(teacherId: String!): [Student!]!
   teacherSubjects(teacherId: String!): [Subject!]!
-  teacherSchedule(teacherId: String!): [Schedule!]!
+  teacherSchedule(teacherId: String!): [ScheduleEntry!]!
   courseStudents(courseId: String!): [Student!]!
   courseTeachers(courseId: String!): [Teacher!]!
   subjectDependencies(subjectId: String!): [Subject!]!
