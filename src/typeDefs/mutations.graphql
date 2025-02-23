@@ -1,3 +1,6 @@
 type Mutation {
+  createStudent(input: CreateStudentInput!): Student!
+  updateStudent(matriculation: ID!, input: UpdateStudentInput!): Student!
+  deleteStudent(matriculation: ID!): DeletionResult!
   enrollStudentInCourse(input: EnrollStudentInput!): EnrollmentResult!
 }
