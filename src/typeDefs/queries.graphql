@@ -1,10 +1,13 @@
 type Query {
   students: [Student!]!
-  student(matriculation: String!): Student
-  teachers: [Teacher!]!
-  subjects(matriculation: String!): [Subject!]!
-  courses: [Course!]!
-  studentsByCourse(courseId: Int!): [Student!]!
-  teachersByCourse(courseId: Int!): [Teacher!]!
-  getStudentHistory(student_id: String!): [HistoryRecord!]!
+  student(matriculation_id: String!): Student
+  studentSubjects(matriculation_id: String!): Student
+  studentSchedule(matriculation_id: String!): Student
+  studentHistory(matriculation: String!): [Schedule!]!
+  teacherStudents(teacherId: String!): [Student!]!
+  teacherSubjects(teacherId: String!): [Subject!]!
+  teacherSchedule(teacherId: String!): [Schedule!]!
+  courseStudents(courseId: String!): [Student!]!
+  courseTeachers(courseId: String!): [Teacher!]!
+  subjectDependencies(subjectId: String!): [Subject!]!
 }
